@@ -1,0 +1,51 @@
+<div id="container"></div>
+
+<script src="solution1.js"></script>
+
+<script>
+
+//var book_details = object.Books;
+
+//console.log(Books);
+
+    
+    let FormLi = (book)=>{
+        let checked='checked';
+        if(!book.alreadyRead){
+        checked = ''; 
+        }
+    let bookList =  `<tr><td><h2>${book.title}<h2></td>
+            <td><h5>(${book.author})<h5/></td>
+            <td><input type="checkbox" ${checked} onClick=Clicked('${book.id}') /></td></tr>`;
+    
+                  
+                  return bookList;                      
+        }                                     
+  
+
+
+    let Clicked=(id)=>{
+    console.log(id);
+
+     books.map(book => {if(book.id === id){
+         console.log(book.alreadyRead)
+        book.alreadyRead=this.event.target.checked;
+    }
+     })
+     console.log(books);
+
+    
+    Load();
+
+};
+let container = document.querySelector("#container")
+//OnLoad Function Call's Definition
+let Load = ()=>{
+    container.innerHTML=books.map(book=>`<table>${FormLi(book)}</table>`).join('');
+}
+
+//OnLoad Function Call
+Load();
+
+let onClick = document.querySelector('input[type=checkbox]');
+</script>   
