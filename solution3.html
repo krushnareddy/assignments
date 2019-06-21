@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Product Adding</h2>
+                <form class="form-horizontal" >
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Product Name:</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id="product_name" placeholder="Enter Product Name" name="product_name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="product_qty">Product Qty:</label>
+                    <div class="col-sm-8">          
+                      <input type="text" class="form-control" id="product_qty" placeholder="Enter Product Qty" name="product_qty">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                        <label class="control-label col-sm-2" for="product_qty">Product Price:</label>
+                        <div class="col-sm-8">          
+                          <input type="text" class="form-control" id="product_price" placeholder="Enter Product Price" name="product_price">
+                        </div>
+                      </div>
+                  <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-8">
+                      <button type="button" id="add_products" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-lg-6">
+                    <h2>Update Products</h2>
+                    <form class="form-horizontal" >
+                            <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">ID:</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control" id="id"  name="id">
+                                    </div>
+                                  </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Product Name:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="uproduct_name" placeholder="Enter Product Name" name="product_name">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-sm-2" for="product_qty">Product Qty:</label>
+                        <div class="col-sm-10">          
+                          <input type="text" class="form-control" id="uproduct_qty" placeholder="Enter Product Qty" name="product_qty">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                            <label class="control-label col-sm-2" for="product_qty">Product Price:</label>
+                            <div class="col-sm-10">          
+                              <input type="text" class="form-control" id="uproduct_price" placeholder="Enter Product Price" name="product_price">
+                            </div>
+                          </div>
+                      <div class="form-group">        
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="button" id="update_products" class="btn btn-primary">Update</button>
+                        </div>
+                      </div>
+                    </form>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="product_qty">Product Price:</label>
+                        <div class="col-sm-10">  
+                        <input type="text" class="form-control" id="serach_id" name="serach_id"/>
+                        </div>
+                    </div>
+                    <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="button" id="search_result" onclick="search_result" class="btn btn-primary">Search</button>
+                            </div>
+                          </div>
+                    </form>
+                </div>
+                <div class="col-lg-6" id="searchresult">
+                    <p id="p_id"></p>
+                    <p id="p_name"></p>
+                    <p id="p_qty"></p>
+                    <p id="p_price"></p>
+                </div>
+            </div>
+              <div  class="container">
+                    <table class="table table-borderd">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product Name</th>
+                            <th>Product QTY</th>
+                            <th>Product Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products">
+
+                    </tbody>
+                    </table>
+              </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="solution3.js"></script>
+    
+    <script>
+      let FormList = (product)=> {
+          
+    let a=
+              
+              `<tr><td> <b> ${product.id} </b> </td>,<td>  <b> ${
+            product.name
+          } </b></td>,<td><b> ${product.quantity} </b></td>,<td><b> ${
+            product.price
+          }</b> </td><td><button id=${
+            product.id
+          } onclick="remove(${product.id})" class="btn btn-danger">Delete</button> &nbsp; <button id=${
+            product.id
+          } onclick="update(${product.id})" class="btn btn-primary">Update</button></td></tr>`
+        ;
+        return a;
+
+  };
+
+  let products = document.querySelector("#products")
+  let Load = ()=>{
+    products.innerHTML=productlist.map(product=> FormList(product));
+}
+
+Load();
+
+
+let remove = (id) => {  
+  
+  let condtion_check = productlist.filter(pr => pr.id != id);
+  console.log(condtion_check);
+  productlist = condtion_check;
+  Load();
+};
+
+
+let update = (id) => {  
+  
+   let condtion_check = productlist.filter(pr => {if(pr.id == id){
+   document.querySelector('#uproduct_name').value = pr.name
+   document.querySelector('#uproduct_qty').value = pr.quantity
+   document.querySelector('#uproduct_price').value = pr.price
+   document.querySelector('#id').value = pr.id
+
+}})
+//   productlist = condtion_check;
+//   Load();
+};
+
+let search_res = document.getElementById("search_result");
+search_res.addEventListener("click", () => { 
+  
+  search_products();
+  
+});
+let search_products = () => {  
+  let serach_id = document.getElementById("serach_id").value; 
+  //alert(serach_id);
+  let res = productlist.filter(pr => {if(pr.id == serach_id){
+  document.querySelector('#p_id').innerHTML = pr.id
+  document.querySelector('#p_name').innerHTML = pr.name
+  document.querySelector('#p_qty').innerHTML = pr.quantity
+  document.querySelector('#p_price').innerHTML = pr.price
+  
+
+}})}
+
+
+let add_pro = document.getElementById("add_products");
+add_pro.addEventListener("click", () => {
+  add_new_product();
+});
+
+let add_new_product = () => {
+  let product_name = document.getElementById("product_name").value;
+  let product_qty = document.getElementById("product_qty").value;
+  let product_price = document.getElementById("product_price").value;
+  
+  let new_product = {
+    id: productlist.length + 1,
+    name: product_name,
+    quantity: product_qty,
+    price: product_price
+  };
+  productlist.push(new_product);
+  Load();
+};
+
+
+let updateproduct = document.getElementById('update_products');
+updateproduct.addEventListener('click',()=>{
+    updateproducts();
+})
+
+let updateproducts = () =>{
+    let id = document.getElementById("id").value;
+    let uproduct_name = document.getElementById("uproduct_name").value;   
+    let uproduct_qty = document.getElementById("uproduct_qty").value;   
+    let uproduct_price = document.getElementById("uproduct_price").value;
+
+    productlist.filter(proupdate => {
+        if(proupdate.id == id){
+            proupdate.name = uproduct_name; 
+            proupdate.quantity = uproduct_qty; 
+            proupdate.price = uproduct_price; 
+        }
+    })
+
+    Load();
+
+  
+}
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
